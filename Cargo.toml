@@ -1,0 +1,48 @@
+[package]
+name = "hum"
+version = "0.0.1"
+description = "webhook microservice for drone ci"
+keywords = ["hum", "warp", "microservice", "drone", "webhook"]
+categories = ["web-programming::http-server"]
+repository = "https://github.com/beepboopbangbang/hum"
+authors = ["jojobyte <184880+jojobyte@users.noreply.github.com>"]
+readme = "README.md"
+edition = "2018"
+
+[features]
+default = []
+
+[dependencies]
+http = "0.2"
+structopt = "0.3.21"
+exitfailure = "0.5.1"
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+hyper = { version = "0.14", features = ["stream", "server", "http1", "http2", "tcp", "client"] }
+warp = "0.3"
+log = "0.4"
+pretty_env_logger = "0.4"
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
+tracing-subscriber = "0.2.7"
+tracing-log = "0.1"
+handlebars = "3.0.0"
+tokio-stream = { version = "0.1.1", features = ["net"] }
+listenfd = "0.3"
+dotenv = "0.15.0"
+dotenv_codegen = "0.15.0"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+futures-core = { version = "0.3.0", default-features = false }
+futures-util = { version = "0.3.0", default-features = false }
+
+[dev-dependencies]
+
+[profile.release]
+codegen-units = 1
+incremental = false
+
+[profile.bench]
+codegen-units = 1
+incremental = false
