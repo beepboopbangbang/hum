@@ -6,32 +6,7 @@ use support::*;
 use dotenv::dotenv;
 use hum::{api, api_json, api_url, get_latest_build, get_latest_item};
 use reqwest::{Method, StatusCode};
-use serde_derive::{Deserialize, Serialize};
 use std::env;
-
-#[derive(Deserialize, Serialize)]
-struct HelloWorld {
-    hello: String,
-}
-
-#[tokio::test]
-async fn api_url_returns_correct_url() {
-    let base: String = "https://test.drone.server".to_string();
-    let org: String = "testing".to_string();
-    let repo: String = "webhook".to_string();
-    let num: String = "5".to_string();
-
-    let mut request_url = api_url(&base, &org, &repo, "");
-
-    let mut url: String = "https://test.drone.server/api/repos/testing/webhook/builds".to_string();
-
-    assert_eq!(&request_url, &url);
-
-    request_url = api_url(&base, &org, &repo, &num);
-    url = [url, num].join("/");
-
-    assert_eq!(&request_url, &url);
-}
 
 #[tokio::test]
 async fn reqwest_get_latest_item() {

@@ -2,7 +2,7 @@ name: Rust
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 #   pull_request:
 #     branches: [ master ]
 
@@ -13,12 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --release --verbose
-    - name: Run tests
-      run: cargo test --verbose
-    - uses: ncipollo/release-action@v1
-      with:
-        artifacts: "target/release/hum"
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --release --verbose
+      - name: Run tests
+        run: cargo test --test url --verbose
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "target/release/hum"
+          token: ${{ secrets.GITHUB_TOKEN }}
